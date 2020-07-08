@@ -23,7 +23,9 @@ public class EETags {
 		public static final Tag<Block> END_PLANTABLE = createTag("end_plantable");
 		public static final Tag<Block> CHORUS_PLANTABLE = createTag("chorus_plantable");
 		public static final Tag<Block> POISE_PLANTABLE = createTag("poise_plantable");
-		
+		public static final Tag<Block> ENDER_FIRE_BASE = createTag("ender_fire_base");
+		public static final Tag<Block> END_CRYSTAL_PLACEABLE = createTag("end_crystal_placeable");
+
 		private static Tag<Block> createTag(String name) {
 			return new BlockTags.Wrapper(new ResourceLocation(EndergeticExpansion.MOD_ID, name));
 		}
