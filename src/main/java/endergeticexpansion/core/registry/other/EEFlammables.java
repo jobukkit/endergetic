@@ -18,6 +18,7 @@ public class EEFlammables {
 		DataUtils.registerFlammable(EEBlocks.POISE_FENCE_GATE.get(), 5, 20);
 		DataUtils.registerFlammable(EEBlocks.POISE_VERTICAL_PLANKS.get(), 5, 20);
 		DataUtils.registerFlammable(EEBlocks.POISE_VERTICAL_SLAB.get(), 5, 20);
+		DataUtils.registerFlammable(EEBlocks.POISE_BOOKSHELF.get(), 30, 20);
 	}
 	
 }
