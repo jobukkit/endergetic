@@ -1,4 +1,4 @@
-package endergeticexpansion.core.registry;
+package com.minecraftabnormals.endergetic.core.registry;
 
 import java.util.concurrent.Callable;
 
@@ -8,19 +8,19 @@ import com.teamabnormals.abnormals_core.common.blocks.BookshelfBlock;
 import com.teamabnormals.abnormals_core.common.blocks.VerticalSlabBlock;
 import com.teamabnormals.abnormals_core.common.blocks.sign.*;
 import com.teamabnormals.abnormals_core.common.blocks.wood.*;
+import com.minecraftabnormals.endergetic.client.renderers.item.EETileEntityItemRenderer;
+import com.minecraftabnormals.endergetic.common.EEProperties;
+import com.minecraftabnormals.endergetic.common.blocks.*;
+import com.minecraftabnormals.endergetic.common.blocks.poise.*;
+import com.minecraftabnormals.endergetic.common.blocks.poise.boof.*;
+import com.minecraftabnormals.endergetic.common.blocks.poise.hive.*;
+import com.minecraftabnormals.endergetic.common.tileentities.BolloomBudTileEntity;
+import com.minecraftabnormals.endergetic.common.tileentities.PuffBugHiveTileEntity;
+import com.minecraftabnormals.endergetic.core.EndergeticExpansion;
+import com.minecraftabnormals.endergetic.core.registry.util.EndergeticRegistryHelper;
 
-import endergeticexpansion.client.render.item.EETileEntityItemRenderer;
-import endergeticexpansion.common.EEProperties;
-import endergeticexpansion.common.blocks.*;
-import endergeticexpansion.common.blocks.poise.*;
-import endergeticexpansion.common.blocks.poise.boof.*;
-import endergeticexpansion.common.blocks.poise.hive.*;
-import endergeticexpansion.common.tileentities.BolloomBudTileEntity;
-import endergeticexpansion.common.tileentities.PuffBugHiveTileEntity;
-import endergeticexpansion.core.EndergeticExpansion;
-import endergeticexpansion.core.registry.util.EndergeticRegistryHelper;
+import net.minecraft.block.AbstractBlock.Properties;
 import net.minecraft.block.Block;
-import net.minecraft.block.Block.Properties;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FlowerPotBlock;
 import net.minecraft.block.PressurePlateBlock;
@@ -39,8 +39,8 @@ import net.minecraftforge.fml.common.Mod;
 
 @SuppressWarnings("deprecation")
 @Mod.EventBusSubscriber(modid = EndergeticExpansion.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class EEBlocks {
-	public static final EndergeticRegistryHelper HELPER = EndergeticExpansion.REGISTRY_HELPER;
+public final class EEBlocks {
+	private static final EndergeticRegistryHelper HELPER = EndergeticExpansion.REGISTRY_HELPER;
 	
 	public static final RegistryObject<Block> CORROCK_OVERWORLD_BLOCK           = HELPER.createBlock("overworld_corrock_block", () -> new CorrockBlock(EEProperties.CORROCK_BASE(MaterialColor.BROWN_TERRACOTTA, true), false), ItemGroup.BUILDING_BLOCKS);
 	public static final RegistryObject<Block> PETRIFIED_CORROCK_OVERWORLD_BLOCK = HELPER.createBlock("petrified_overworld_corrock_block", () -> new CorrockBlock(EEProperties.CORROCK_BASE(MaterialColor.BROWN_TERRACOTTA, true), true), null);
@@ -67,7 +67,7 @@ public class EEBlocks {
 	public static final RegistryObject<CorrockCrownBlock> CORROCK_CROWN_END_STANDING                 = HELPER.createCorrockStandingBlock("end_corrock_crown", () -> new CorrockCrownStandingBlock(EEProperties.CORROCK_BASE_GLOWING(MaterialColor.PURPLE), false), () -> CORROCK_CROWN_END_WALL.get(), ItemGroup.DECORATIONS);
 	public static final RegistryObject<CorrockCrownBlock> PETRIFIED_CORROCK_CROWN_END_STANDING       = HELPER.createCorrockStandingBlock("petrified_end_corrock_crown", () -> new CorrockCrownStandingBlock(EEProperties.CORROCK_BASE_GLOWING(MaterialColor.PURPLE), true), () -> PETRIFIED_CORROCK_CROWN_END_WALL.get(), null);
 	public static final RegistryObject<Block> ENDSTONE_COVER                                         = HELPER.createBlockNoItem("endstone_cover", () -> new EndStoneCoverBlock(Block.Properties.create(Material.TALL_PLANTS, MaterialColor.PURPLE_TERRACOTTA).hardnessAndResistance(1.5F, 6.0F).doesNotBlockMovement()));
-	
+
 	/*
 	 * Poise Forest
 	 */
@@ -94,7 +94,7 @@ public class EEBlocks {
 	public static final Pair<RegistryObject<AbnormalsStandingSignBlock>, RegistryObject<AbnormalsWallSignBlock>> POISE_SIGN = HELPER.createSignBlock("poise", MaterialColor.PURPLE_TERRACOTTA);
 	public static final RegistryObject<BolloomBudBlock> BOLLOOM_BUD               = HELPER.createBlockWithISTER("bolloom_bud", () -> new BolloomBudBlock(EEProperties.POISE_WOOD_OTHER(true, false)), () -> bolloomBudISTER(), ItemGroup.DECORATIONS);
 	public static final RegistryObject<PuffBugHiveBlock> PUFFBUG_HIVE             = HELPER.createBlockWithISTER("puffbug_hive", () -> new PuffBugHiveBlock(EEProperties.PUFFBUG_HIVE(true)), () -> puffbugHiveISTER(), ItemGroup.DECORATIONS);
-	public static final RegistryObject<PuffbugHiveHangerBlock> HIVE_HANGER               = HELPER.createBlockNoItem("hive_hanger", () -> new PuffbugHiveHangerBlock(EEProperties.PUFFBUG_HIVE(false)));
+	public static final RegistryObject<PuffbugHiveHangerBlock> HIVE_HANGER        = HELPER.createBlockNoItem("hive_hanger", () -> new PuffbugHiveHangerBlock(EEProperties.PUFFBUG_HIVE(false)));
 	public static final RegistryObject<Block> BOLLOOM_PARTICLE                    = HELPER.createBlockNoItem("bolloom_particle", () -> new Block(EEProperties.POISE_WOOD_OTHER(false, true)));
 	public static final RegistryObject<BoofBlock> BOOF_BLOCK                      = HELPER.createBlock("boof_block", () -> new BoofBlock(EEProperties.BOOF_BLOCK), ItemGroup.DECORATIONS);
 	public static final RegistryObject<DispensedBoofBlock> BOOF_BLOCK_DISPENSED   = HELPER.createBlockNoItem("dispensed_boof_block", () -> new DispensedBoofBlock(EEProperties.BOOF_BLOCK.doesNotBlockMovement().notSolid().hardnessAndResistance(-1, 3600000.0F)));
@@ -122,8 +122,13 @@ public class EEBlocks {
 	public static final RegistryObject<RotatableBlock> MYSTICAL_OBSIDIAN_ACTIVATION_RUNE_ACTIVE = HELPER.createBlock("activated_mystical_obsidian_activation_rune", () -> new RotatableBlock(EEProperties.MYSTICAL_OBSIDIAN.lightValue(5)), null);
 	public static final RegistryObject<AcidianLanternBlock> ACIDIAN_LANTERN      = HELPER.createBlock("acidian_lantern", () ->  new AcidianLanternBlock(EEProperties.ACIDIAN_LANTERN), ItemGroup.DECORATIONS);
 	public static final RegistryObject<Block> CRYSTAL_HOLDER                     = HELPER.createBlock("crystal_holder", () -> new Block(EEProperties.MYSTICAL_OBSIDIAN), null);
-	public static final RegistryObject<Block> ENDER_FIRE                         = HELPER.createBlock("ender_fire", () -> new EnderFireBlock(Properties.from(Blocks.FIRE)), null);
-	
+
+	public static final RegistryObject<Block> ENDER_FIRE 		= HELPER.createBlockNoItem("ender_fire", () -> new EnderFireBlock(Properties.from(Blocks.FIRE)));
+	public static final RegistryObject<Block> ENDER_CAMPFIRE	= HELPER.createBlock("ender_campfire", () -> new EnderCampfireBlock(Block.Properties.from(Blocks.CAMPFIRE)), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> ENDER_LANTERN		= HELPER.createBlock("ender_lantern", () -> new LanternBlock(Block.Properties.from(Blocks.LANTERN)), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> ENDER_WALL_TORCH	= HELPER.createBlockNoItem("ender_wall_torch", () -> new EnderWallTorchBlock(Block.Properties.from(Blocks.TORCH)));
+	public static final RegistryObject<Block> ENDER_TORCH		= HELPER.createWallOrFloorBlock("ender_torch", () -> new EnderTorchBlock(Block.Properties.from(Blocks.TORCH)), () -> ENDER_WALL_TORCH.get(), ItemGroup.DECORATIONS);
+
 	/*
 	 * Compatibility
 	 */

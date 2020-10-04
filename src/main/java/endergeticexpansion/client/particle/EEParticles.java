@@ -2,6 +2,7 @@ package endergeticexpansion.client.particle;
 
 import endergeticexpansion.core.EndergeticExpansion;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.FlameParticle;
 import net.minecraft.particles.BasicParticleType;
 import net.minecraft.particles.ParticleType;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
@@ -18,7 +19,8 @@ public class EEParticles {
 	
 	public static final RegistryObject<BasicParticleType> POISE_BUBBLE = createBasicParticleType(true, "poise_bubble");
 	public static final RegistryObject<BasicParticleType> SHORT_POISE_BUBBLE = createBasicParticleType(true, "short_poise_bubble");
-	
+	public static final RegistryObject<BasicParticleType> ENDER_FLAME = createBasicParticleType(true, "ender_flame");
+
 	private static RegistryObject<BasicParticleType> createBasicParticleType(boolean alwaysShow, String name) {
 		RegistryObject<BasicParticleType> particleType = PARTICLES.register(name, () -> new BasicParticleType(alwaysShow));
 		return particleType;
@@ -35,10 +37,13 @@ public class EEParticles {
 			if(checkForNonNullWithReflectionCauseForgeIsBaby(SHORT_POISE_BUBBLE)) {
 				Minecraft.getInstance().particles.registerFactory(SHORT_POISE_BUBBLE.get(), PoiseBubbleParticle.ShortFactory::new);
 			}
+			if (checkForNonNullWithReflectionCauseForgeIsBaby(ENDER_FLAME)) {
+				Minecraft.getInstance().particles.registerFactory(ENDER_FLAME.get(), FlameParticle.Factory::new);
+			}
 		}
 		
 	}
-	
+
 	private static boolean checkForNonNullWithReflectionCauseForgeIsBaby(RegistryObject<BasicParticleType> registryObject) {
 		return ObfuscationReflectionHelper.getPrivateValue(RegistryObject.class, registryObject, "value") != null;
 	}

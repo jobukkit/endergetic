@@ -1,32 +1,32 @@
-package endergeticexpansion.core;
+package com.minecraftabnormals.endergetic.core;
 
 import java.util.Arrays;
 
+import com.minecraftabnormals.endergetic.core.registry.other.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.minecraftabnormals.endergetic.client.particles.EEParticles;
+import com.minecraftabnormals.endergetic.client.renderers.entity.*;
+import com.minecraftabnormals.endergetic.client.renderers.entity.booflo.*;
+import com.minecraftabnormals.endergetic.client.renderers.tile.*;
+import com.minecraftabnormals.endergetic.common.network.entity.*;
+import com.minecraftabnormals.endergetic.common.network.entity.booflo.*;
+import com.minecraftabnormals.endergetic.common.network.entity.puffbug.*;
+import com.minecraftabnormals.endergetic.common.network.nbt.*;
+import com.minecraftabnormals.endergetic.common.world.EEWorldGenHandler;
+import com.minecraftabnormals.endergetic.common.world.features.EEFeatures;
+import com.minecraftabnormals.endergetic.common.world.surfacebuilders.EESurfaceBuilders;
+import com.minecraftabnormals.endergetic.core.config.EEConfig;
+import com.minecraftabnormals.endergetic.core.keybinds.KeybindHandler;
+import com.minecraftabnormals.endergetic.core.registry.EEBiomes;
+import com.minecraftabnormals.endergetic.core.registry.EEEntities;
+import com.minecraftabnormals.endergetic.core.registry.EESounds;
+import com.minecraftabnormals.endergetic.core.registry.EETileEntities;
+import com.minecraftabnormals.endergetic.core.registry.util.EndergeticRegistryHelper;
 import com.teamabnormals.abnormals_core.core.library.api.AmbienceMusicPlayer;
 
-import endergeticexpansion.client.particle.EEParticles;
-import endergeticexpansion.client.render.entity.*;
-import endergeticexpansion.client.render.entity.booflo.*;
-import endergeticexpansion.client.render.tile.*;
-import endergeticexpansion.common.network.entity.*;
-import endergeticexpansion.common.network.entity.booflo.*;
-import endergeticexpansion.common.network.entity.puffbug.RotateMessage;
-import endergeticexpansion.common.network.nbt.SUpdateNBTTagMessage;
-import endergeticexpansion.common.world.EEWorldGenHandler;
-import endergeticexpansion.common.world.EndOverrideHandler;
-import endergeticexpansion.common.world.features.EEFeatures;
-import endergeticexpansion.common.world.surfacebuilders.EESurfaceBuilders;
-import endergeticexpansion.core.config.EEConfig;
-import endergeticexpansion.core.keybinds.KeybindHandler;
-import endergeticexpansion.core.registry.EEBiomes;
-import endergeticexpansion.core.registry.EEEntities;
-import endergeticexpansion.core.registry.EESounds;
-import endergeticexpansion.core.registry.EETileEntities;
-import endergeticexpansion.core.registry.other.*;
-import endergeticexpansion.core.registry.util.EndergeticRegistryHelper;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EnderCrystalRenderer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -67,22 +67,23 @@ public class EndergeticExpansion {
 		
 		this.setupMessages();
 		EEDataSerializers.registerSerializers();
+		EEDataProcessors.registerTrackedData();
 		
 		final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-    	
+		
 		REGISTRY_HELPER.getDeferredItemRegister().register(modEventBus);
 		REGISTRY_HELPER.getDeferredBlockRegister().register(modEventBus);
 		REGISTRY_HELPER.getDeferredSoundRegister().register(modEventBus);
 		REGISTRY_HELPER.getDeferredTileEntityRegister().register(modEventBus);
-		EEParticles.PARTICLES.register(modEventBus);
 		REGISTRY_HELPER.getDeferredEntityRegister().register(modEventBus);
+		EEParticles.PARTICLES.register(modEventBus);
 		EESurfaceBuilders.SURFACE_BUILDERS.register(modEventBus);
 		EEFeatures.FEATURES.register(modEventBus);
 		EEBiomes.BIOMES.register(modEventBus);
 		
 		modEventBus.addListener((ModConfig.ModConfigEvent event) -> {
 			final ModConfig config = event.getConfig();
-			if(config.getSpec() == EEConfig.COMMON_SPEC) {
+			if (config.getSpec() == EEConfig.COMMON_SPEC) {
 				EEConfig.ValuesHolder.updateCommonValuesFromConfig(config);
 			}
 		});
@@ -102,7 +103,9 @@ public class EndergeticExpansion {
 			EEFlammables.registerFlammables();
 			EEBiomes.applyBiomeInfo();
 			EEBlockRegistrars.registerFireInfo();
+			EECompostables.registerCompostables();
 			EEWorldGenHandler.overrideFeatures();
+			EEEntityAttributes.putAttributes();
 		});
 		EECapabilities.registerCaps();
 		EndOverrideHandler.overrideEndFactory();
@@ -117,8 +120,9 @@ public class EndergeticExpansion {
 		ClientRegistry.bindTileEntityRenderer(EETileEntities.ENDSTONE_COVER.get(), EndStoneCoverTileEntityRenderer::new);
 		ClientRegistry.bindTileEntityRenderer(EETileEntities.BOLLOOM_BUD.get(), BolloomBudTileEntityRenderer::new);
 		ClientRegistry.bindTileEntityRenderer(EETileEntities.PUFFBUG_HIVE.get(), PuffBugHiveTileEntityRenderer::new);
-		ClientRegistry.bindTileEntityRenderer(EETileEntities.BOOF_BLOCK_DISPENSED.get(), BoofBlockTileEntityRenderer::new);
-	
+		ClientRegistry.bindTileEntityRenderer(EETileEntities.BOOF_BLOCK_DISPENSED.get(), DispensedBoofBlockTileEntityRenderer::new);
+		ClientRegistry.bindTileEntityRenderer(EETileEntities.ENDER_CAMPFIRE.get(), CampfireTileEntityRenderer::new);
+
 		RenderingRegistry.registerEntityRenderingHandler(EEEntities.BOLLOOM_FRUIT.get(), BolloomFruitRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(EEEntities.POISE_CLUSTER.get(), PoiseClusterRender::new);
 		RenderingRegistry.registerEntityRenderingHandler(EEEntities.BOOF_BLOCK.get(), BoofBlockRenderer::new);
@@ -135,7 +139,6 @@ public class EndergeticExpansion {
 		EnderCrystalRenderer.ENDER_CRYSTAL_TEXTURES = new ResourceLocation(EndergeticExpansion.MOD_ID, "textures/entity/end_crystal.png");
 	}
 	
-	
 	@OnlyIn(Dist.CLIENT)
 	private void registerItemColors(ColorHandlerEvent.Item event) {
 		REGISTRY_HELPER.processSpawnEggColors(event);
@@ -143,42 +146,42 @@ public class EndergeticExpansion {
     
 	private void setupMessages() {
 		int id = -1;
-    	
+
 		CHANNEL.messageBuilder(SUpdateNBTTagMessage.class, id++)
 		.encoder(SUpdateNBTTagMessage::serialize).decoder(SUpdateNBTTagMessage::deserialize)
 		.consumer(SUpdateNBTTagMessage::handle)
 		.add();
-    	
+
 		CHANNEL.messageBuilder(SSetCooldownMessage.class, id++)
 		.encoder(SSetCooldownMessage::serialize).decoder(SSetCooldownMessage::deserialize)
 		.consumer(SSetCooldownMessage::handle)
 		.add();
-    	
+
 		CHANNEL.messageBuilder(SBoofEntityMessage.class, id++)
 		.encoder(SBoofEntityMessage::serialize).decoder(SBoofEntityMessage::deserialize)
 		.consumer(SBoofEntityMessage::handle)
 		.add();
-		
+
 		CHANNEL.messageBuilder(SInflateMessage.class, id++)
 		.encoder(SInflateMessage::serialize).decoder(SInflateMessage::deserialize)
 		.consumer(SInflateMessage::handle)
 		.add();
-		
+
 		CHANNEL.messageBuilder(SIncrementBoostDelayMessage.class, id++)
 		.encoder(SIncrementBoostDelayMessage::serialize).decoder(SIncrementBoostDelayMessage::deserialize)
 		.consumer(SIncrementBoostDelayMessage::handle)
 		.add();
-		
+
 		CHANNEL.messageBuilder(SSetPlayerNotBoostingMessage.class, id++)
 		.encoder(SSetPlayerNotBoostingMessage::serialize).decoder(SSetPlayerNotBoostingMessage::deserialize)
 		.consumer(SSetPlayerNotBoostingMessage::handle)
 		.add();
-		
+
 		CHANNEL.messageBuilder(SSlamMessage.class, id++)
 		.encoder(SSlamMessage::serialize).decoder(SSlamMessage::deserialize)
 		.consumer(SSlamMessage::handle)
 		.add();
-		
+
 		CHANNEL.messageBuilder(RotateMessage.class, id++)
 		.encoder(RotateMessage::serialize).decoder(RotateMessage::deserialize)
 		.consumer(RotateMessage::handle)
