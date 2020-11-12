@@ -109,6 +109,7 @@ public final class EEBlocks {
 	public static final RegistryObject<SlabBlock> EUMUS_BRICK_SLAB               = HELPER.createBlock("eumus_brick_slab", () -> new SlabBlock(EEProperties.EUMUS_BRICKS), ItemGroup.BUILDING_BLOCKS);
 	public static final RegistryObject<Block> EUMUS_BRICK_STAIRS                 = HELPER.createBlock("eumus_brick_stairs", () -> new StairsBlock(() -> EUMUS_BRICKS.get().getDefaultState(), EEProperties.EUMUS_BRICKS), ItemGroup.BUILDING_BLOCKS);
 	public static final RegistryObject<WallBlock> EUMUS_BRICK_WALL               = HELPER.createBlock("eumus_brick_wall", () -> new WallBlock(EEProperties.EUMUS_BRICKS), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> EUMUS_BRICKS_CRACKED      		 = HELPER.createBlock("cracked_eumus_bricks", () -> new Block(EEProperties.EUMUS_BRICKS), ItemGroup.BUILDING_BLOCKS);
 	public static final RegistryObject<FlowerPotBlock> POISE_BUSH_POT            = HELPER.createBlockNoItem("potted_poise_bush", () -> new FlowerPotBlock(POISE_BUSH.get(), Properties.from(Blocks.POTTED_PINK_TULIP)));
 	public static final RegistryObject<Block> MYSTICAL_OBSIDIAN                  = HELPER.createBlock("mystical_obsidian", () -> new Block(EEProperties.MYSTICAL_OBSIDIAN), null);
 	public static final RegistryObject<WallBlock> MYSTICAL_OBSIDIAN_WALL         = HELPER.createBlock("mystical_obsidian_wall", () -> new WallBlock(EEProperties.MYSTICAL_OBSIDIAN), null);
