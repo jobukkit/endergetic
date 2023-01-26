@@ -143,4 +143,12 @@ public final class EEBlocks {
 	private static Callable<ItemStackTileEntityRenderer> puffbugHiveISTER() {
 		return () -> new EETileEntityItemRenderer<TileEntity>(PuffBugHiveTileEntity::new);
 	}
+
+	@SubscribeEvent
+	public static void onRegisterBlocks(RegistryEvent.Register<Block> event) {
+		final Block blocks[] = {
+			ENDER_FIRE
+		};
+		event.getRegistry().registerAll(blocks);
+	}
 }
