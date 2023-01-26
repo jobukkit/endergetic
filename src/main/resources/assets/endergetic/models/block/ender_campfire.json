@@ -2,6 +2,6 @@
   "parent": "minecraft:block/campfire",
   "textures": {
     "fire": "endergetic:block/ender_campfire_fire",
-    "lit_log": "endergetic:block/ender_campfire_log_lit"
+    "litlog": "endergetic:block/ender_campfire_log_lit"
   }
 }
