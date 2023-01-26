@@ -85,6 +85,24 @@ repositories {
 dependencies {
     minecraft 'net.minecraftforge:forge:1.15.2-31.2.57'
     implementation fg.deobf("com.teamabnormals.abnormals_core:abnormals-core:1.15.2-1.0.6")
+
+    compileOnly fg.deobf("mezz.jei:jei-1.15.2:${project.jei}:api")
+    runtimeOnly fg.deobf("mezz.jei:jei-1.15.2:${project.jei}")
+}
+
+repositories {
+    maven {
+        name = "CurseForge"
+        url = "https://www.cursemaven.com"
+    }
+    maven {
+        name = "Progwml6 maven"
+        url = "https://dvs1.progwml6.com/files/maven/"
+    }
+    maven {
+        name = "ModMaven"
+        url = "https://modmaven.k-4u.nl"
+    }
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..

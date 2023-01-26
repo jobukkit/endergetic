@@ -28,7 +28,7 @@ public final class EEBlockRegistrars {
 		setRenderLayer(EEBlocks.PETRIFIED_CORROCK_NETHER.get(), RenderType.getCutout());
 		setRenderLayer(EEBlocks.PETRIFIED_CORROCK_OVERWORLD.get(), RenderType.getCutout());
 
-		setRenderLayer(EEBlocks.ENDER_FIRE.get(), RenderType.getCutout());
+		setRenderLayer(EEBlocks.ENDER_FIRE, RenderType.getCutout());
       	setRenderLayer(EEBlocks.ENDER_TORCH.get(), RenderType.getCutout());
     	setRenderLayer(EEBlocks.ENDER_WALL_TORCH.get(), RenderType.getCutout());
     	setRenderLayer(EEBlocks.ENDER_LANTERN.get(), RenderType.getCutout());

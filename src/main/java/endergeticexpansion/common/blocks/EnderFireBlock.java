@@ -7,6 +7,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 
@@ -29,6 +30,11 @@ public class EnderFireBlock extends FireBlock {
 	}
 
 	public boolean canBurn(BlockState stateIn) {
+		return true;
+	}
+
+	@Override
+	public boolean isBurning(BlockState state, IBlockReader world, BlockPos pos) {
 		return true;
 	}
 	
