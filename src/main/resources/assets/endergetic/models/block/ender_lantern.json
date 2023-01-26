@@ -1,6 +1,6 @@
 {
-  "parent": "minecraft:block/template_lantern",
+  "parent": "minecraft:block/lantern",
   "textures": {
-    "lantern": "endergetic:block/ender_lantern"
+    "all": "endergetic:block/ender_lantern"
   }
 }
