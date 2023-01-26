@@ -1,8 +1,8 @@
-package com.minecraftabnormals.endergetic.common.blocks;
+package endergeticexpansion.common.blocks;
 
 import java.util.Random;
 
-import com.minecraftabnormals.endergetic.client.particles.EEParticles;
+import endergeticexpansion.client.particle.EEParticles;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.TorchBlock;
@@ -15,7 +15,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class EnderTorchBlock extends TorchBlock {
 
 	public EnderTorchBlock(Properties properties) {
-		super(properties, ParticleTypes.FLAME);
+		super(properties);
 	}
 
 	@OnlyIn(Dist.CLIENT)

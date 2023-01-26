@@ -1,8 +1,8 @@
-package com.minecraftabnormals.endergetic.common.blocks;
+package endergeticexpansion.common.blocks;
 
 import java.util.Random;
 
-import com.minecraftabnormals.endergetic.common.tileentities.EnderCampfireTileEntity;
+import endergeticexpansion.common.tileentities.EnderCampfireTileEntity;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CampfireBlock;
@@ -18,7 +18,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class EnderCampfireBlock extends CampfireBlock {
 
 	public EnderCampfireBlock(Properties properties) {
-		super(false, 3, properties);
+		super(properties);
 	}
 
 	public TileEntity createNewTileEntity(IBlockReader worldIn) {

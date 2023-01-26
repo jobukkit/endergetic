@@ -1,7 +1,7 @@
-package com.minecraftabnormals.endergetic.core.registry.other;
+package endergeticexpansion.core.registry.other;
 
 import com.teamabnormals.abnormals_core.core.utils.DataUtils;
-import com.minecraftabnormals.endergetic.core.registry.EEBlocks;
+import endergeticexpansion.core.registry.EEBlocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderType;

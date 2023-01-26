@@ -1,7 +1,7 @@
 package endergeticexpansion.common.blocks;
 
 import endergeticexpansion.core.registry.other.EETags;
-import net.minecraft.block.AbstractFireBlock;
+import net.minecraft.block.FireBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -10,10 +10,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 
-public class EnderFireBlock extends AbstractFireBlock {
+public class EnderFireBlock extends FireBlock {
 
 	public EnderFireBlock(Properties builder) {
-		super(builder, 3.0F);
+		super(builder);
 	}
 
 	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
@@ -28,7 +28,7 @@ public class EnderFireBlock extends AbstractFireBlock {
 		return block.isIn(EETags.Blocks.ENDER_FIRE_BASE_BLOCKS);
 	}
 
-	protected boolean canBurn(BlockState stateIn) {
+	public boolean canBurn(BlockState stateIn) {
 		return true;
 	}
 	

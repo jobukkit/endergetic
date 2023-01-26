@@ -1,4 +1,4 @@
-package com.minecraftabnormals.endergetic.core.registry;
+package endergeticexpansion.core.registry;
 
 import java.util.concurrent.Callable;
 
@@ -8,25 +8,19 @@ import com.teamabnormals.abnormals_core.common.blocks.BookshelfBlock;
 import com.teamabnormals.abnormals_core.common.blocks.VerticalSlabBlock;
 import com.teamabnormals.abnormals_core.common.blocks.sign.*;
 import com.teamabnormals.abnormals_core.common.blocks.wood.*;
-import com.minecraftabnormals.endergetic.client.renderers.item.EETileEntityItemRenderer;
-import com.minecraftabnormals.endergetic.common.EEProperties;
-import com.minecraftabnormals.endergetic.common.blocks.*;
-import com.minecraftabnormals.endergetic.common.blocks.poise.*;
-import com.minecraftabnormals.endergetic.common.blocks.poise.boof.*;
-import com.minecraftabnormals.endergetic.common.blocks.poise.hive.*;
-import com.minecraftabnormals.endergetic.common.tileentities.BolloomBudTileEntity;
-import com.minecraftabnormals.endergetic.common.tileentities.PuffBugHiveTileEntity;
-import com.minecraftabnormals.endergetic.core.EndergeticExpansion;
-import com.minecraftabnormals.endergetic.core.registry.util.EndergeticRegistryHelper;
 
-import net.minecraft.block.AbstractBlock.Properties;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.FlowerPotBlock;
-import net.minecraft.block.PressurePlateBlock;
-import net.minecraft.block.SlabBlock;
-import net.minecraft.block.StairsBlock;
-import net.minecraft.block.WallBlock;
+import endergeticexpansion.client.render.item.EETileEntityItemRenderer;
+import endergeticexpansion.common.EEProperties;
+import endergeticexpansion.common.blocks.*;
+import endergeticexpansion.common.blocks.poise.*;
+import endergeticexpansion.common.blocks.poise.boof.*;
+import endergeticexpansion.common.blocks.poise.hive.*;
+import endergeticexpansion.common.tileentities.BolloomBudTileEntity;
+import endergeticexpansion.common.tileentities.PuffBugHiveTileEntity;
+import endergeticexpansion.core.EndergeticExpansion;
+import endergeticexpansion.core.registry.util.EndergeticRegistryHelper;
+import net.minecraft.block.*;
+import net.minecraft.block.Block.Properties;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.client.renderer.tileentity.ItemStackTileEntityRenderer;
@@ -34,6 +28,8 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 
@@ -78,7 +74,7 @@ public final class EEBlocks {
 	public static final RegistryObject<PoiseClusterBlock> POISE_CLUSTER           = HELPER.createBlock("poise_cluster", () -> new PoiseClusterBlock(EEProperties.POISE_CLUSTER.tickRandomly()), ItemGroup.BUILDING_BLOCKS);
 	public static final RegistryObject<StrippedLogBlock> POISE_LOG_STRIPPED       = HELPER.createBlock("stripped_poise_stem", () -> new StrippedLogBlock(EEProperties.POISE_WOOD), ItemGroup.BUILDING_BLOCKS);
 	public static final RegistryObject<StrippedWoodBlock> POISE_WOOD_STRIPPED     = HELPER.createBlock("stripped_poise_wood", () -> new StrippedWoodBlock(EEProperties.POISE_WOOD), ItemGroup.BUILDING_BLOCKS);
-	public static final RegistryObject<AbnormalsLogBlock> POISE_LOG               = HELPER.createBlock("poise_stem", () -> new AbnormalsLogBlock(() -> EEBlocks.POISE_LOG_STRIPPED.get(), EEProperties.POISE_WOOD), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<AbnormalsLogBlock> POISE_LOG               = HELPER.createBlock("poise_stem", () -> new AbnormalsLogBlock(() -> EEBlocks.POISE_LOG_STRIPPED.get(), MaterialColor.PURPLE_TERRACOTTA,  EEProperties.POISE_WOOD), ItemGroup.BUILDING_BLOCKS);
 	public static final RegistryObject<WoodBlock> POISE_WOOD                      = HELPER.createBlock("poise_wood", () -> new WoodBlock(() -> EEBlocks.POISE_WOOD_STRIPPED.get(), EEProperties.POISE_WOOD), ItemGroup.BUILDING_BLOCKS);
 	public static final RegistryObject<GlowingPoiseLogBlock> POISE_LOG_GLOWING    = HELPER.createBlock("glowing_poise_stem", () -> new GlowingPoiseLogBlock(EEProperties.POISE_LOG_GLOWING), ItemGroup.BUILDING_BLOCKS);
 	public static final RegistryObject<GlowingPoiseLogBlock> POISE_WOOD_GLOWING   = HELPER.createBlock("glowing_poise_wood", () -> new GlowingPoiseLogBlock(EEProperties.POISE_LOG_GLOWING), ItemGroup.BUILDING_BLOCKS);
@@ -91,7 +87,6 @@ public final class EEBlocks {
 	public static final RegistryObject<WoodPressurePlateBlock> POISE_PRESSURE_PLATE = HELPER.createBlock("poise_pressure_plate", () -> new WoodPressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, EEProperties.POISE_WOOD), ItemGroup.REDSTONE);
 	public static final RegistryObject<Block> POISE_BUTTON                        = HELPER.createBlock("poise_button", () -> new AbnormalsWoodButtonBlock(EEProperties.POISE_WOOD_OTHER(false, true)), ItemGroup.REDSTONE);
 	public static final RegistryObject<Block> POISE_TRAPDOOR                      = HELPER.createBlock("poise_trapdoor", () -> new WoodTrapDoorBlock(EEProperties.POISE_WOOD_NOT_SOLID), ItemGroup.REDSTONE);
-	public static final Pair<RegistryObject<AbnormalsStandingSignBlock>, RegistryObject<AbnormalsWallSignBlock>> POISE_SIGN = HELPER.createSignBlock("poise", MaterialColor.PURPLE_TERRACOTTA);
 	public static final RegistryObject<BolloomBudBlock> BOLLOOM_BUD               = HELPER.createBlockWithISTER("bolloom_bud", () -> new BolloomBudBlock(EEProperties.POISE_WOOD_OTHER(true, false)), () -> bolloomBudISTER(), ItemGroup.DECORATIONS);
 	public static final RegistryObject<PuffBugHiveBlock> PUFFBUG_HIVE             = HELPER.createBlockWithISTER("puffbug_hive", () -> new PuffBugHiveBlock(EEProperties.PUFFBUG_HIVE(true)), () -> puffbugHiveISTER(), ItemGroup.DECORATIONS);
 	public static final RegistryObject<PuffbugHiveHangerBlock> HIVE_HANGER        = HELPER.createBlockNoItem("hive_hanger", () -> new PuffbugHiveHangerBlock(EEProperties.PUFFBUG_HIVE(false)));

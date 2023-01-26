@@ -17,13 +17,13 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class EEFeatures {
 	public static final DeferredRegister<Feature<?>> FEATURES = new DeferredRegister<>(ForgeRegistries.FEATURES, EndergeticExpansion.MOD_ID);
 	
-	public static final RegistryObject<Feature<NoFeatureConfig>> POISE_GRASS       = createFeature("poise_bush", () -> new PoiseBushFeature(NoFeatureConfig.field_236558_a_));
-	public static final RegistryObject<Feature<NoFeatureConfig>> POISE_TALLGRASS   = createFeature("poise_tallgrass", () -> new TallPoiseBushFeature(NoFeatureConfig.field_236558_a_));
-	public static final RegistryObject<Feature<NoFeatureConfig>> POISE_CLUSTER     = createFeature("poise_cluster", () -> new PoiseClusterFeature(NoFeatureConfig.field_236558_a_));
-	public static final RegistryObject<Feature<NoFeatureConfig>> BOLLOOM_BUD       = createFeature("bolloom_bud", () -> new BolloomBudFeature(NoFeatureConfig.field_236558_a_));
-	public static final RegistryObject<Feature<NoFeatureConfig>> PUFFBUG_HIVE      = createFeature("puffbug_hive", () -> new PuffBugHiveFeature(NoFeatureConfig.field_236558_a_));
-	public static final RegistryObject<Feature<NoFeatureConfig>> POISE_DOME        = createFeature("poise_dome", () -> new PoiseDomeFeature(NoFeatureConfig.field_236558_a_));
-	public static final RegistryObject<Feature<NoFeatureConfig>> POISE_TREE        = createFeature("poise_tree", () -> new PoiseTreeFeature(NoFeatureConfig.field_236558_a_));
+	public static final RegistryObject<Feature<NoFeatureConfig>> POISE_GRASS       = createFeature("poise_bush", () -> new PoiseBushFeature(NoFeatureConfig::deserialize));
+	public static final RegistryObject<Feature<NoFeatureConfig>> POISE_TALLGRASS   = createFeature("poise_tallgrass", () -> new TallPoiseBushFeature(NoFeatureConfig::deserialize));
+	public static final RegistryObject<Feature<NoFeatureConfig>> POISE_CLUSTER     = createFeature("poise_cluster", () -> new PoiseClusterFeature(NoFeatureConfig::deserialize));
+	public static final RegistryObject<Feature<NoFeatureConfig>> BOLLOOM_BUD       = createFeature("bolloom_bud", () -> new BolloomBudFeature(NoFeatureConfig::deserialize));
+	public static final RegistryObject<Feature<NoFeatureConfig>> PUFFBUG_HIVE      = createFeature("puffbug_hive", () -> new PuffBugHiveFeature(NoFeatureConfig::deserialize));
+	public static final RegistryObject<Feature<NoFeatureConfig>> POISE_DOME        = createFeature("poise_dome", () -> new PoiseDomeFeature(NoFeatureConfig::deserialize));
+	public static final RegistryObject<Feature<NoFeatureConfig>> POISE_TREE        = createFeature("poise_tree", () -> new PoiseTreeFeature(NoFeatureConfig::deserialize));
 	
 	public static final RegistryObject<Feature<NoFeatureConfig>> CORROCK_PATCH     = createFeature("corrock_patch", () -> new CorrockPatchFeature(NoFeatureConfig::deserialize));
 	public static final RegistryObject<Feature<SphereReplaceConfig>> GROUND_PATCH  = createFeature("ground_patch", () -> new GroundPatchFeature(SphereReplaceConfig::deserialize));
